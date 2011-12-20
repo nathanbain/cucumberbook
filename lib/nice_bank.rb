@@ -1,14 +1,21 @@
+require_relative 'transaction_queue'
+require_relative 'balance_store'
 class Account
   def credit(amount)
-    @balance = amount
+    @queue = TransactionQueue.new
+    @balance_store = BalanceStore.new
   end
   
   def balance
-    @balance
+    @balance_store.balance
+  end
+  
+  def credit(amount)
+    @queue.write("+#{amount})
   end
   
   def debit(amount)
-    @balance -= amount
+    @queue.write("-#{amount})
   end
 end
 
