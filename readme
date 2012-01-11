@@ -1,0 +1,7 @@
+
+Tests which require Service Manager will not work on Windows. The following workaround is recommended.
+
+add another gem, childprocess, to your Gemfile:
+  gem 'childprocess'In your features/support directory, add a script to start and stop the backend service:features/support/services.rb 
+  require 'childprocess'  process = ChildProcess.build('ruby', 'lib/transaction_processor.rb') process.start  at_exit { process.stop }
+  
