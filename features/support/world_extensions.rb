@@ -1,18 +1,20 @@
 module KnowsTheDomain
 
-class UserInterface
-include Capybara::DSL
+#require File.join(File.dirname(__FILE__), '..', '..', 'lib', 'account')
 
-  def withdraw_from(account, amount)
-	Sinatra::Application.account = account
-	visit '/'
-	fill_in 'Amount', :with => amount
-	click_button 'Withdraw'
+  class UserInterface
+    include Capybara::DSL
+
+    def withdraw_from(account, amount)
+	    Sinatra::Application.account = account
+	    visit '/'
+	    fill_in 'Amount', :with => amount
+	    click_button 'Withdraw'
+    end
   end
-end
 
-  def my_account
-    @my_account ||= Account.new
+	def my_account
+    @my_account ||= Account.create!(:number => "test", :balance => 0)
   end
 	
   def cash_slot
